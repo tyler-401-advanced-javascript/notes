@@ -1,0 +1,26 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "Note taking app",
+  "bin": {
+    "notes": "index.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tyler-401-advanced-javascript/notes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tyler-401-advanced-javascript/notes/issues"
+  },
+  "homepage": "https://github.com/tyler-401-advanced-javascript/notes#readme",
+  "dependencies": {
+    "jest": "^25.1.0",
+    "minimist": "^1.2.0"
+  }
+}
