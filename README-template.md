@@ -8,30 +8,24 @@ Tyler Sayvetz
 
 ### Links and Resources
 
-- [submission PR](http://xyz.com)
-- [ci/cd](http://xyz.com) (GitHub Actions)
-- [back-end server url](http://xyz.com) (when applicable)
-- [front-end application](http://xyz.com) (when applicable)
+- [submission PR]https://github.com/tyler-401-advanced-javascript/notes/pull/1
+- [ci/cd] https://travis-ci.com/tyler-401-advanced-javascript/notes/builds/148321541 (GitHub Actions)
+
+- this is a CLI, no deployment.
 
 ### Setup
+Clone the repo.
+npm i
+node index.js -a 'some note'
 
-#### `.env` requirements (where applicable)
-
-i.e.
-
-- `PORT` - Port Number
-- `MONGODB_URI` - URL to the running mongo instance/db
-
-#### How to initialize/run your application (where applicable)
-
-- e.g. `npm start`
 
 #### Tests
 
-- How do you run tests?
-- Any tests of note?
-- Describe any tests that you did not complete, skipped, etc
+- Tests are located in __test__ directory. 
+- npm test __test__/input.test.js
+
+tests failing on Travis, passing locally. 
+
 
 #### UML
-
-Link to an image of the UML for your application and response to events
+![UML diagram](tests.png);
