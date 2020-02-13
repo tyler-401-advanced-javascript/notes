@@ -1,17 +1,17 @@
-# LAB - Class 01
+# LAB - Class 02
 
 ## Project Name
 
-Notes
+Notes CLI program!
 
-### Author: Student/Group Name
+### Author:
 
 Tyler Sayvetz
 
 ### Links and Resources
 
-- [submission PR]
-- [ci/cd]
+- [submission PR] https://github.com/tyler-401-advanced-javascript/notes/pull/2
+- [ci/cd] None.
 
 - this is a CLI, no deployment.
 
@@ -37,4 +37,4 @@ node index.js -a 'tasty beverage'
 
 #### UML
 
-![UML diagram]();
+![UML diagram](assets/tests02.png)
