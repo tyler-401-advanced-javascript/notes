@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const MONGOOSE_URI = 'mongodb://localhost:27017/notes';
 const mongooseOptions = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false,
 }
 
 mongoose.connect(MONGOOSE_URI, mongooseOptions);
@@ -18,13 +19,13 @@ const validNoteSchema = {
   action: { type: 'string', required: true },
   payload: { type: 'string', altType: 'number', required: true },
   option: { type: 'string'},
-  category: { type: 'string'}
+  optionPayload: { type: 'string'}
 }
 
 
 //create 
 const input = new Input();
-console.log('****In index: input: ', input)
+// console.log('****In index: input: ', input)
 const noteValidator = new Validator(validNoteSchema);
 
 
@@ -35,9 +36,12 @@ if (noteValidator.validate(input)) {
       console.log(results);
       mongoose.disconnect();
     })
+    .catch(err => {
+      console.log('*******************Catch. Note operation failed ', err)
+    })
 
 } else {
-  console.log('Get halp......')
+  console.log('Dont quit your day job')
   getHelp();
 }
 
