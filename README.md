@@ -1,7 +1,7 @@
-# LAB - Class 03
+# LAB - Class 04
 
 ## Project Name
-Notes CLI program!
+Notes CLI program. Create, read, update, categorize, and delete notes directly from the command line. Store them in a Mongo Database. 
 
 ### Author:
 Tyler Sayvetz
@@ -30,28 +30,32 @@ brew install mongo (?)
 
 - Create a note: 
 
-node index.js -a|--add "your note!"
-
-node index.js -a|--add "your note!" -c|--category TOAST|NOTE|UNCAT
+`node index.js -a|--add "your note!"
+`
+`node index.js -a|--add "your note!" -c|--category TOAST|NOTE|UNCAT`
 
 - List all notes: 
 
-node index.js -l|--list
-
+`node index.js -l|--list
+`
 
 - List all notes in a category
 
-node index.js -l|--list UNCAT|NOTE|TOAST
-
+`node index.js -l|--list UNCAT|NOTE|TOAST
+`
 - Delete a specific note
 
-node index.js -d|--delete {note id}
+`node index.js -d|--delete {note id}
+`
+- Update a specific note's category or text
+
+`node index.js -u|--update {note id} -t|--text|-c|-category {the new text or category}`
 
 
 
 #### Tests
 
-Currently in pre-alpha super baby break-me mode. Use at your own risk. No tests written yet.
+Currently in pre-alpha super baby break-me mode. Use at your own risk. No tests written for DB operations yet. Most controller tests run. 
 
 
 
