@@ -11,6 +11,7 @@ const minimist = require('minimist');
 //watch the console.log()
 jest.spyOn(global.console, 'log');
 
+
 //set up a mock implementation, 
 //this will mock the minimist function. Whenever minimist is called, the return value of this callback will be injected and returned in place of whatever minimist was going to return. It's an override.
 
@@ -34,35 +35,41 @@ describe('notes modules', () => {
     const payload = 'lacroix';
     const notes = new Notes({command: {action, payload}});
     notes.execute();
-    expect(console.log()).toHaveBeenCalled;
+    expect(console.log).toHaveBeenCalled;
+  })
+
+  it('Notes can add a note: ', () => {
+    const query = {
+      action: 'add',
+      payload: 'Walk dog',
+      category: 'Chores'
+    }
+    const notes = new Notes({command: query})
+    jest.spyOn(notes, 'add');
+    notes.execute()
+      .then( expect(notes.add).toHaveBeenCalledWith(query.payload, query.category) );
   })
 })
+
+
+
+
 
 describe('Test prototypes of Input', () => {
   it('Check parseInput() for positive', () => {
     let input = new Input();
     expect(input.parseInput({a: 'spicy'})).toEqual({'action': 'add', 'payload': 'spicy'});
-  })
-  it('Check parseInput() for positive 2 ', () => {
-    let input = new Input();
     expect(input.parseInput({a: '23232424'})).toEqual({'action': 'add', 'payload': '23232424'});
-  })
-  it('Check parseInput() for positive 3 ', () => {
-    let input = new Input();
     expect(input.parseInput({a: 1234})).toEqual({'action': 'add', 'payload': 1234});
   })
+  
   it('Check parseInput() to reject badly formatted input', () => {
     let input = new Input();
     expect(input.parseInput({x: 'spicy'})).toEqual(false);
-  })
-  it('Check parseInput() to reject badly formatted input 2 ', () => {
-    let input = new Input();
+    expect(input.parseInput({a: ''})).toEqual(false);
     expect(input.parseInput('spicy')).toEqual(false);
   })
-  it('Check parseInput() to reject badly formatted input 3 ', () => {
-    let input = new Input();
-    expect(input.parseInput({a: ''})).toEqual(false);
-  })
+  
   it('Complete runthrough with positive input', () => {
     const input = new Input();
     const notes = new Notes(input)
