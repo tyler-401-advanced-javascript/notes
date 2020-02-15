@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const Input = require('./lib/Input.js');
 const Notes = require('./lib/Notes.js');
 const Validator = require('./lib/Validator.js');
