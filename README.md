@@ -17,11 +17,15 @@ Mongo connection setup help from Adrian, Thanks Adrian!!!!
 ### Setup
 Clone the repo.
 
-- npm i
+- `npm i`
 
 
 - Install and start Mongo DB
-brew install mongo (?)
+Install mongo. With brew if possible. 
+
+`brew tap mongodb/brew`
+
+`brew install mongodb-community@4.2`
 
 `brew services start mongo-community`
 
@@ -30,11 +34,13 @@ brew install mongo (?)
 
 - Create a note: 
 
-`node index.js -a|--add "your note!"
-`
+`node index.js -a|--add "your note!"`
+
+
 `node index.js -a|--add "your note!" -c|--category TOAST|NOTE|UNCAT`
 
 - List all notes: 
+
 
 `node index.js -l|--list
 `
@@ -50,6 +56,7 @@ brew install mongo (?)
 - Update a specific note's category or text
 
 `node index.js -u|--update {note id} -t|--text|-c|-category {the new text or category}`
+
 
 
 
