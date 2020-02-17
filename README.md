@@ -1,4 +1,4 @@
-# LAB - Class 04
+# LAB - Class 06
 
 ## Project Name
 Notes CLI program. Create, read, update, categorize, and delete notes directly from the command line. Store them in a Mongo Database. 
