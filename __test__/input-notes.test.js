@@ -1,9 +1,19 @@
 const Input = require('../lib/Input.js');
 const Notes = require('../lib/Notes.js');
 const Validator = require('../lib/Validator.js');
+// const supergoose = require('supergoose');
 
 
-//todo: what is happening here? 
+// // set up mongoose mock with supergoose. 
+// const ClickSchema = new Schema({ 
+//     text: { required: true, type: 'String' },
+//     category: { required: true, type: 'String', enum: ['NOTE', 'UNCAT', 'TOAST']}
+// })
+
+// ClickSchema.plugin(supergoose);
+// const SuperNotes = mongoose.model('Notes', ClickSchema)
+
+
 jest.mock('minimist');
 const minimist = require('minimist');
 
@@ -15,7 +25,6 @@ jest.spyOn(global.console, 'log');
 //set up a mock implementation, 
 //this will mock the minimist function. Whenever minimist is called, the return value of this callback will be injected and returned in place of whatever minimist was going to return. It's an override.
 
-//todo: how does this not fail? 
 minimist.mockImplementation(() => {
   return {
     a: 'spicy beverage'
@@ -42,12 +51,12 @@ describe('notes modules', () => {
     const query = {
       action: 'add',
       payload: 'Walk dog',
-      category: 'Chores'
+      optionPayload: 'TOAST'
     }
     const notes = new Notes({command: query})
     jest.spyOn(notes, 'add');
     notes.execute()
-      .then( expect(notes.add).toHaveBeenCalledWith(query.payload, query.category) );
+      .then( expect(notes.add).toHaveBeenCalledWith(query.payload, query.optionPayload) );
   })
 })
 
@@ -70,11 +79,12 @@ describe('Test prototypes of Input', () => {
     expect(input.parseInput('spicy')).toEqual(false);
   })
   
-  it('Complete runthrough with positive input', () => {
+  it('Complete runthrough with positive mock input', () => {
     const input = new Input();
     const notes = new Notes(input)
+    jest.spyOn(notes, 'add');
     notes.execute()
-    expect(console.log).toHaveBeenCalledWith(`Congratulations. Consider yourself a BAMF. 'spicy beverage' is your payload. Have a nice day.`);
+    expect(notes.add).toHaveBeenCalledWith('spicy beverage', null)
   })
 
 
@@ -111,6 +121,8 @@ describe('Test prototypes of Input', () => {
       expect(validator.validate({command: {action: 'add', payload: 123444}})).toEqual(true);
     })
   })
+
+
 
 
 })
