@@ -1,19 +1,17 @@
 const Input = require('../lib/Input.js');
 const Notes = require('../lib/Notes.js');
 const Validator = require('../lib/Validator.js');
-const mongoose = require('mongoose');
-const supergoose = require('./supergoose');
+// const supergoose = require('supergoose');
 
 
-// set up mongoose mock with supergoose. 
-//todo: cannot find this syntax error.
-const ClickSchema = new Schema({ 
-    text: { required: true, type: 'String' },
-    category: { required: true, type: 'String', enum: ['NOTE', 'UNCAT', 'TOAST']
-})
+// // set up mongoose mock with supergoose. 
+// const ClickSchema = new Schema({ 
+//     text: { required: true, type: 'String' },
+//     category: { required: true, type: 'String', enum: ['NOTE', 'UNCAT', 'TOAST']}
+// })
 
-ClickSchema.plugin(supergoose);
-const SuperNotes = mongoose.model('Notes', ClickSchema)
+// ClickSchema.plugin(supergoose);
+// const SuperNotes = mongoose.model('Notes', ClickSchema)
 
 
 jest.mock('minimist');
@@ -53,12 +51,12 @@ describe('notes modules', () => {
     const query = {
       action: 'add',
       payload: 'Walk dog',
-      category: 'Chores'
+      optionPayload: 'TOAST'
     }
     const notes = new Notes({command: query})
     jest.spyOn(notes, 'add');
     notes.execute()
-      .then( expect(notes.add).toHaveBeenCalledWith(query.payload, query.category) );
+      .then( expect(notes.add).toHaveBeenCalledWith(query.payload, query.optionPayload) );
   })
 })
 
@@ -81,11 +79,12 @@ describe('Test prototypes of Input', () => {
     expect(input.parseInput('spicy')).toEqual(false);
   })
   
-  it('Complete runthrough with positive input', () => {
+  it('Complete runthrough with positive mock input', () => {
     const input = new Input();
     const notes = new Notes(input)
+    jest.spyOn(notes, 'add');
     notes.execute()
-    expect(console.log).toHaveBeenCalledWith(`Congratulations. Consider yourself a BAMF. 'spicy beverage' is your payload. Have a nice day.`);
+    expect(notes.add).toHaveBeenCalledWith('spicy beverage', null)
   })
 
 
